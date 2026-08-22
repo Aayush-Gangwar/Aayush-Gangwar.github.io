@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting…</title>
+
+  <!--
+    GitHub Pages has no server-side rewrites, so any path it doesn't
+    recognize as a real file (e.g. /projects/arena, /resume — all
+    client-side-only routes, entirely handled in script.js) falls
+    through to this 404.html instead of erroring out completely. Encode
+    the intended path into a query string and send the browser back to
+    the real index.html, whose <head> decoder (index.html, right after
+    the Google Fonts links) turns it back into a normal-looking URL via
+    history.replaceState before script.js's router ever looks at it.
+    pathSegmentsToKeep is 0 because this site deploys to the root of a
+    username.github.io domain, not a /repo-name/ subpath — see
+    rafgraph/spa-github-pages for the general technique this follows.
+  -->
+  <script>
+    var pathSegmentsToKeep = 0;
+    var l = window.location;
+    l.replace(
+      l.protocol + "//" + l.hostname + (l.port ? ":" + l.port : "") +
+      l.pathname.split("/").slice(0, 1 + pathSegmentsToKeep).join("/") + "/?/" +
+      l.pathname.slice(1).split("/").slice(pathSegmentsToKeep).join("/").replace(/&/g, "~and~") +
+      (l.search ? "&" + l.search.slice(1).replace(/&/g, "~and~") : "") +
+      l.hash
+    );
+  </script>
+</head>
+
+<body>
+  Redirecting…
+</body>
+
+</html>
